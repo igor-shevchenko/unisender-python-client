@@ -44,7 +44,7 @@ Create SPF, DKIM records for your domain, see [instruction](https://www.unisende
 
 4. Client usage:
 
-Client allow use any [API methods](https://www.unisender.com/ru/support/api/api), for example "create_field" and "import_contacts":
+Client allows using all [API methods](https://www.unisender.com/ru/support/api/api), for example "create_field" and "import_contacts":
 
 ```python
 # create contacts fields
@@ -62,15 +62,15 @@ response = cl.import_contacts(
 
 ### Advanced usage
 
+In order to send a email message, you need to perform these API requests:
 
-For start mailing your need a complete a set of API requests:
 1. Create list;
-2. Create fields;
+2. Create contact fields;
 3. Import contacts;
 4. Create email message;
 5. Create campaign.
 
-It is not comfortable. To simplify this procedure, use "SimpleClient" and next methods:
+It is not convenient. To simplify this procedure, use "SimpleClient" and the following methods:
 - **create_email_campaign** - send one email message;
 - **create_email_campaigns** - send a lot of email messages.
 
@@ -90,15 +90,15 @@ cl = SimpleClient(
 #### create_email_campaign
 
 Attributes:
-- **recipients*** [list] - each list item must be represented by a dictionary with the same set of keys. Dictionary keys can be used in a email template;
-- **email_data*** [dict] - represent fields for "create_email_message" API-method. See the [method documentation](https://www.unisender.com/ru/support/api/messages/createemailmessage/) for a list of valid parameters. Parameter "list_id" is set automatically;
-- **campaign_data** [dict] - represent fields for "create_campaign" API-method. See the [method documentation](https://www.unisender.com/ru/support/api/messages/createcampaign/) for a list of valid parameters. Parameter "message_id" is set automatically;
+- **recipients*** [list] - each list item must be a dictionary with the same set of keys. Dictionary keys can be used in a email template;
+- **email_data*** [dict] - fields for the "create_email_message" API-method. See the [method documentation](https://www.unisender.com/ru/support/api/messages/createemailmessage/) for a list of valid parameters. Parameter "list_id" is set automatically;
+- **campaign_data** [dict] - fields for the "create_campaign" API-method. See the [method documentation](https://www.unisender.com/ru/support/api/messages/createcampaign/) for a list of valid parameters. Parameter "message_id" is set automatically;
 
 Return value [int] - created campaign id. 
 
 Examples:
 
-1. Send custom email message (with body as HTML) now:
+1. Send custom email message (with body as HTML) immediately:
 ```python
 client.create_email_campaign(
     recipients = [
@@ -136,7 +136,7 @@ client.create_email_campaign(
     }
 )
 ```
-3. Send delayed email message (from UniSender system template) with UTC time zone:
+3. Send delayed email message (from UniSender system template) with UTC timezone:
 
 ``` python
 start_time = datetime.now() + timedelta(hours=2)
@@ -162,8 +162,8 @@ client.create_email_campaign(
 #### create_email_campaigns
 
 Attributes:
-- **recipients*** [list] - each list item must be represented by a dictionary with the same set of keys. Dictionary keys can be used in a email template;
-- **campaigns** [list] - each list item must be represented by next dictionary:
+- **recipients*** [list] - each list item must be a dictionary with the same set of keys. Dictionary keys can be used in a email template;
+- **campaigns** [list] - each list item must be a dictionary having the following structure:
     ```python
     {
         "email_data": {
@@ -183,8 +183,8 @@ Attributes:
     }
     ```
 
-- **default_email_data** [dict] - represent default fields for campaigns. See the [method documentation](https://www.unisender.com/ru/support/api/messages/createemailmessage/) for a list of valid parameters. Parameter "list_id" is set automatically;
-- **default_campaign_data** [dict] - represent default fields for campaigns. See the [method documentation](https://www.unisender.com/ru/support/api/messages/createcampaign/) for a list of valid parameters. Parameter "message_id" is set automatically.
+- **default_email_data** [dict] - default fields for campaigns. See the [method documentation](https://www.unisender.com/ru/support/api/messages/createemailmessage/) for a list of valid parameters. Parameter "list_id" is set automatically;
+- **default_campaign_data** [dict] - default fields for campaigns. See the [method documentation](https://www.unisender.com/ru/support/api/messages/createcampaign/) for a list of valid parameters. Parameter "message_id" is set automatically.
 
 Return value [list] - created campaigns ids. 
 
@@ -218,7 +218,7 @@ client.create_email_campaigns(
                 "body": '<html>...</html>',
             }
         },
-        # Second campaign starts after 1 hours from HTML-message
+        # Second campaign starts after 1 hour from HTML-message
         {
             "email_data": {
                 "subject": 'Email subject',
